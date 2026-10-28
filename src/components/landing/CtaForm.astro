@@ -1,0 +1,33 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+import { DemoRequestForm } from './pieces/DemoRequestForm';
+---
+
+<!-- Sin tema oscuro (spec §4.6): surface-tint con decoración accent-blue / accent-turquoise -->
+<section id="agendar-demo" class="relative w-full overflow-hidden bg-surface-tint py-16 sm:py-20 lg:py-24">
+  <!-- Semicírculo turquesa → azul, recortado por el borde izquierdo -->
+  <div class="pointer-events-none absolute left-0 top-16 h-[183px] w-[107px] rounded-r-full bg-gradient-to-b from-accent-turquoise to-accent-blue" aria-hidden="true"></div>
+  <!-- Círculo inferior derecho accent-blue 30 % (bleed) -->
+  <div class="pointer-events-none absolute -bottom-24 -right-20 size-[280px] rounded-full bg-accent-blue/30" aria-hidden="true"></div>
+
+  <PageContainer width="content" class="relative z-10">
+    <div class="mx-auto max-w-[52.5rem] rounded-[2rem] bg-neutral-0 p-6 shadow-sm sm:rounded-media sm:p-12 lg:p-14">
+      <div class="text-center">
+        <p class="text-[13px] font-semibold uppercase tracking-[0.2em] text-primary-500 sm:text-[15px]">
+          Sesión en vivo · 20 minutos
+        </p>
+
+        <h2 class="mt-6 text-[32px] font-semibold leading-[1.12] text-brand-900 sm:text-[38px] lg:text-[48px]">
+          Agenda una demo <span class="text-accent-turquoise-text">con nosotros.</span>
+        </h2>
+
+        <p class="mx-auto mt-8 max-w-[35rem] text-base leading-[1.6] text-neutral-700 lg:text-xl lg:leading-8">
+          En una sesión guiada te mostramos cómo evalúa cada corrida y qué hacer cuando se viola una regla.
+        </p>
+      </div>
+
+      <!-- Recorrido en un solo eje centrado: mensaje → datos (1 columna, uno debajo del otro) → botón -->
+      <DemoRequestForm client:visible />
+    </div>
+  </PageContainer>
+</section>

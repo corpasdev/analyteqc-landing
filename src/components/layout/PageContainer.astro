@@ -1,0 +1,42 @@
+---
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  width?: 'content' | 'wide' | 'full';
+  padding?: 'none' | 'responsive';
+  centered?: boolean;
+  class?: string;
+  id?: string;
+}
+
+const {
+  as: Component = 'div',
+  width = 'content',
+  padding = 'responsive',
+  centered = true,
+  class: className = '',
+  id,
+  ...rest
+} = Astro.props;
+
+const widthClasses = {
+  content: 'max-w-[1275px]', // Contenedor estándar x 82-1357 del lienzo de 1440px
+  wide: 'max-w-[1440px]',    // Lienzo completo
+  full: 'max-w-full',
+};
+---
+
+<Component
+  id={id}
+  class:list={[
+    'w-full min-w-0',
+    widthClasses[width],
+    centered && 'mx-auto',
+    padding === 'responsive' && 'px-5 sm:px-8 md:px-12 xl:px-0',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</Component>

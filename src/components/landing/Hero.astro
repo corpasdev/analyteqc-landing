@@ -1,0 +1,45 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+import { RunVerdictAnimated } from './pieces/RunVerdictAnimated';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { demoCta } from '@/config/navigation';
+import { heroRuns } from '@/data/landing';
+---
+
+<!--
+  Hero: una sola escena.
+  Recorrido: H1 (su pregunta) → la corrida se evalúa → alarma roja → plan de acción → CTA.
+  (La foto de la bacterióloga queda pendiente de ubicar en otra sección.)
+-->
+<section class="relative w-full overflow-hidden bg-[linear-gradient(100deg,var(--color-surface-tint)_0%,var(--color-neutral-0)_100%)] pb-14 pt-10 sm:pb-20 sm:pt-14 lg:pb-16 lg:pt-12">
+  <PageContainer width="content" class="relative z-10">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+      <!-- Mensaje -->
+      <div class="hero-content flex flex-col items-start lg:col-span-7">
+        <h1 class="text-[40px] font-bold leading-[1.08] tracking-[-0.01em] text-brand-900 sm:text-[52px] lg:text-[58px] xl:text-[66px]">
+          Sabe en cada corrida si puedes <span class="text-accent-turquoise-text">liberar tus resultados.</span>
+        </h1>
+
+        <p class="mt-6 max-w-[32rem] text-lg leading-[1.6] text-neutral-500 lg:mt-8 lg:text-xl lg:leading-8">
+          Si una regla de Westgard se viola, AnalyteQC te dice qué hacer, paso a paso.
+        </p>
+
+        <a id="hero-cta" href={demoCta.href} class={cn(buttonVariants({ size: 'cta' }), 'group mt-8 lg:mt-10')}>
+          {demoCta.label}
+          <svg class="size-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Escena: la corrida evaluada en vivo -->
+      <div class="hero-visual relative mx-auto w-full max-w-[30rem] lg:col-span-5 lg:mr-0 lg:max-w-[31rem]">
+        <!-- Fondo suave detrás de la tarjeta -->
+        <div class="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-primary-50 via-surface-tint to-accent-turquoise/15 sm:-inset-6 sm:rounded-media" aria-hidden="true"></div>
+
+        <RunVerdictAnimated cases={heroRuns} client:load />
+      </div>
+    </div>
+  </PageContainer>
+</section>

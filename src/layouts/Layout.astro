@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'AnalyteQC · Datos confiables para mejores decisiones',
+  description = 'Control de calidad interno y análisis de datos para laboratorios clínicos. Estandarización de cartas Levey-Jennings y multirreglas de Westgard.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/brand/analyteqc-icon.svg" />
+    
+    <!-- Tipografía Corporativa Oficial: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  
+  <body class="min-h-screen bg-neutral-0 text-neutral-900 antialiased selection:bg-accent-turquoise selection:text-neutral-900">
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-clip">
+      <slot name="header" />
+      <main class="w-full flex-1">
+        <slot />
+      </main>
+      <slot name="footer" />
+    </div>
+  </body>
+</html>

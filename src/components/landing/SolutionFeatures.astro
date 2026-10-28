@@ -1,0 +1,22 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+import { SectionHeader } from './pieces/SectionHeader';
+import { FeatureCard } from './pieces/FeatureCard';
+import { solutionFeatures } from '@/data/landing';
+---
+
+<section id="solucion" class="relative w-full bg-surface-tint py-16 sm:py-20 lg:py-24">
+  <PageContainer width="content">
+    <SectionHeader
+      eyebrow="Precisión sin complicaciones"
+      title="Un criterio analítico único, automático e"
+      highlight="inmutable para todo tu equipo."
+      description="AnalyteQC traslada la mejor práctica del control de calidad clínico a una experiencia ágil que elimina las dudas al pie del autoanalizador."
+    />
+
+    <!-- 1 col móvil · cuadrícula 2×2 desde md -->
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+      {solutionFeatures.map((feature) => <FeatureCard {...feature} />)}
+    </div>
+  </PageContainer>
+</section>

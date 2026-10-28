@@ -1,0 +1,94 @@
+/*
+ * AnalyteQC — Tokens y Estándares de Diseño Responsivo
+ *
+ * Basado en las medidas estándar de la industria (W3C / Tailwind v4) y 
+ * armonizado con el sistema de diseño central de AnalyteQC.
+ *
+ * Utiliza unidades rem para respetar la configuración de accesibilidad del usuario.
+ */
+
+@theme static {
+  /* ─── Breakpoints Estándar ─── */
+  --breakpoint-xs: 30rem;    /*  480px — Móviles grandes / Phablets */
+  --breakpoint-sm: 40rem;    /*  640px — Tablets pequeñas / Modo apaisado */
+  --breakpoint-md: 48rem;    /*  768px — Tablets estándar (iPad, Galaxy Tab) */
+  --breakpoint-lg: 64rem;    /* 1024px — Laptops compactas / Tablets pro */
+  --breakpoint-xl: 80rem;    /* 1280px — Laptops estándar / Monitores HD */
+  --breakpoint-2xl: 96rem;   /* 1536px — Monitores FHD / Pantallas Retina */
+  --breakpoint-3xl: 120rem;  /* 1920px — Monitores Widescreen / 4K */
+
+  /* ─── Anchos Máximos de Contenedor Centralizados ─── */
+  --container-layout: 90rem;    /* 1440px — Límite máximo del layout global */
+  --container-content: 72rem;   /* 1152px — Ancho óptimo para lectura y contenido */
+  --container-narrow: 56rem;    /*  896px — Contenido estrecho / formularios / copy */
+  --container-chart: 64rem;     /* 1024px — Espacio reservado para cartas analíticas */
+  --container-table: 48rem;     /*  768px — Tablas de datos clínicos */
+}
+
+:root {
+  /* ─── Referencias de Viewports QA para Pruebas Multidispositivo ─── */
+  --viewport-mobile-small: 20rem;     /* 320px — Pantallas móviles compactas (ej. iPhone SE) */
+  --viewport-mobile: 24.375rem;       /* 390px — Móvil moderno promedio (ej. iPhone 13/14/15) */
+  --viewport-mobile-wide: 26rem;      /* 414px — Móvil grande / Plus / Pro Max */
+  --viewport-tablet: 48rem;           /* 768px — Tablet en posición vertical */
+  --viewport-laptop: 64rem;           /* 1024px — Portátiles ligeros / 13 pulgadas */
+  --viewport-desktop: 80rem;          /* 1280px — Portátiles 15 pulgadas / Desktop */
+  --viewport-wide: 90rem;             /* 1440px — Monitores de oficina / Laboratorio */
+
+  /* ─── Márgenes / Gutters Fluidos Compartidos ─── */
+  --layout-gutter-mobile: 1.25rem;   /* 20px de margen en móvil */
+  --layout-gutter-tablet: 2rem;      /* 32px de margen en tablet */
+  --layout-gutter-desktop: 3rem;     /* 48px de margen en escritorio */
+
+  /* ─── Espaciado Vertical de Secciones ─── */
+  --section-spacing-sm: 3rem;        /* 48px */
+  --section-spacing-md: 5rem;        /* 80px */
+  --section-spacing-lg: 7.5rem;      /* 120px */
+}
+
+/* Clases utilitarias de contenedor responsivo centralizado */
+.responsive-container {
+  width: 100%;
+  max-width: var(--container-layout);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--layout-gutter-mobile);
+  padding-right: var(--layout-gutter-mobile);
+}
+
+@media (min-width: 48rem) {
+  .responsive-container {
+    padding-left: var(--layout-gutter-tablet);
+    padding-right: var(--layout-gutter-tablet);
+  }
+}
+
+@media (min-width: 64rem) {
+  .responsive-container {
+    padding-left: var(--layout-gutter-desktop);
+    padding-right: var(--layout-gutter-desktop);
+  }
+}
+
+.responsive-container-narrow {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--layout-gutter-mobile);
+  padding-right: var(--layout-gutter-mobile);
+}
+
+@media (min-width: 48rem) {
+  .responsive-container-narrow {
+    padding-left: var(--layout-gutter-tablet);
+    padding-right: var(--layout-gutter-tablet);
+  }
+}
+
+@media (min-width: 64rem) {
+  .responsive-container-narrow {
+    padding-left: var(--layout-gutter-desktop);
+    padding-right: var(--layout-gutter-desktop);
+  }
+}

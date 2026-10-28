@@ -1,0 +1,22 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+import { SectionHeader } from './pieces/SectionHeader';
+import { ComparisonMatrix } from './pieces/ComparisonMatrix';
+import { comparisons } from '@/data/landing';
+---
+
+<section id="beneficios" class="relative w-full bg-neutral-0 py-16 sm:py-20 lg:py-24">
+  <PageContainer width="content">
+    <SectionHeader
+      eyebrow="Impacto en tu rutina clínica"
+      title="¿Por qué dar el salto a"
+      highlight="AnalyteQC?"
+      description="Compara la diferencia entre la gestión tradicional en hojas de cálculo y la tranquilidad de operar con un estándar clínico digitalizado."
+    />
+
+    <!-- Cards apiladas en móvil · Table desde md -->
+    <div class="mt-12">
+      <ComparisonMatrix rows={comparisons} />
+    </div>
+  </PageContainer>
+</section>

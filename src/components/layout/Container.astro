@@ -1,0 +1,40 @@
+---
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  size?: 'layout' | 'content' | 'narrow' | 'chart' | 'table' | 'full';
+  class?: string;
+  id?: string;
+}
+
+const {
+  as: Component = 'div',
+  size = 'layout',
+  class: className = '',
+  id,
+  ...rest
+} = Astro.props;
+
+const sizeClasses = {
+  layout: 'max-w-[90rem]',     // 1440px — Estándar máximo global
+  content: 'max-w-[72rem]',    // 1152px — Lectura y narrativa óptima
+  narrow: 'max-w-[56rem]',     // 896px — Formularios y bloques focalizados
+  chart: 'max-w-[64rem]',      // 1024px — Gráficos Levey-Jennings
+  table: 'max-w-[48rem]',      // 768px — Tablas
+  full: 'max-w-full',
+};
+---
+
+<Component
+  id={id}
+  class:list={[
+    'w-full mx-auto',
+    'px-5 sm:px-8 md:px-10 lg:px-12', // Gutters responsivos estandarizados
+    sizeClasses[size],
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</Component>

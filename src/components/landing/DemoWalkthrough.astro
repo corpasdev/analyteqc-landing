@@ -1,0 +1,30 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+import { SectionHeader } from './pieces/SectionHeader';
+import { DemoStepCard } from './pieces/DemoStepCard';
+import { DemoBanner } from './pieces/DemoBanner';
+import { demoSteps } from '@/data/landing';
+---
+
+<section id="demo" class="relative w-full bg-neutral-0 py-16 sm:py-20 lg:py-24">
+  <PageContainer width="content">
+    <SectionHeader
+      eyebrowTone="brand"
+      eyebrow="Demostración personalizada"
+      title="20 minutos que transformarán la"
+      highlight="gestión de calidad en tu laboratorio."
+      description="Una sesión práctica y sin rodeos comerciales, pensada para responder a las preguntas concretas de tu equipo analítico."
+    />
+
+    <!-- 1 col móvil · 2×2 sm (sin divisores) · 4 col lg con divisores verticales -->
+    <ol class="mt-12 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-neutral-200">
+      {demoSteps.map((step) => (
+        <li><DemoStepCard {...step} /></li>
+      ))}
+    </ol>
+
+    <div class="mt-14">
+      <DemoBanner />
+    </div>
+  </PageContainer>
+</section>

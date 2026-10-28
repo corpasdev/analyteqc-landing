@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/landing/Navbar.astro';
+import Hero from '../components/landing/Hero.astro';
+import PainPoints from '../components/landing/PainPoints.astro';
+import SolutionFeatures from '../components/landing/SolutionFeatures.astro';
+import ComparisonTable from '../components/landing/ComparisonTable.astro';
+import Founders from '../components/landing/Founders.astro';
+import DemoWalkthrough from '../components/landing/DemoWalkthrough.astro';
+import CtaForm from '../components/landing/CtaForm.astro';
+import Footer from '../components/landing/Footer.astro';
+import { ScrollToTop } from '../components/landing/pieces/ScrollToTop';
+---
+
+<Layout
+  title="AnalyteQC · Control de Calidad Interno para Laboratorios Clínicos"
+  description="Estandariza tus cartas Levey-Jennings y multirreglas de Westgard en una plataforma creada por bacteriólogos e ingenieros. Solicita tu demo personalizada de 20 minutos."
+>
+  <!-- Sección 1: Navegación Superior -->
+  <Navbar slot="header" />
+
+  <!-- Sección 2: Hero Section (Propuesta de Valor y Gráfico Interactivo) -->
+  <Hero />
+
+  <!-- Sección 3: La Realidad Diaria del Laboratorio (El Problema del Excel) -->
+  <PainPoints />
+
+  <!-- Sección 4: La Solución AnalyteQC (Beneficios y Capacidades Clínicas) -->
+  <SolutionFeatures />
+
+  <!-- Sección 5: Cuadro Comparativo (¿Por qué dar el salto a AnalyteQC?) -->
+  <ComparisonTable />
+
+  <!-- Sección 6: Autoridad y Confianza (El Bacteriólogo y el Ingeniero) -->
+  <Founders />
+
+  <!-- Sección 7: Qué vas a Descubrir en tu Demo (Recorrido de 20 Minutos) -->
+  <DemoWalkthrough />
+
+  <!-- Sección 8: Llamado a la Acción Principal y Formulario de Solicitud -->
+  <CtaForm />
+
+  <!-- Sección 9: Pie de Página -->
+  <Footer slot="footer" />
+
+  <!-- Botón flotante: volver arriba -->
+  <ScrollToTop client:idle />
+</Layout>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Entrada progresiva suave de los elementos del Hero
+    gsap.from('.hero-content > *', {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      stagger: 0.12,
+      ease: 'power2.out',
+      // Evita que el `transition-all` de los botones deje la opacidad a medias
+      clearProps: 'opacity,transform',
+    });
+
+    gsap.from('.hero-visual', {
+      opacity: 0,
+      x: 30,
+      duration: 1,
+      delay: 0.2,
+      ease: 'power2.out',
+      clearProps: 'opacity,transform',
+    });
+  });
+</script>
