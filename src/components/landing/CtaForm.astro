@@ -1,14 +1,14 @@
 ---
 import PageContainer from '../layout/PageContainer.astro';
 import { DemoRequestForm } from './pieces/DemoRequestForm';
+import Molecule from './pieces/Molecule.astro';
 ---
 
-<!-- Sin tema oscuro (spec §4.6): surface-tint con decoración accent-blue / accent-turquoise -->
+<!-- Sin tema oscuro (spec §4.6): surface-tint con moléculas suaves primary-100 -->
 <section id="agendar-demo" class="relative w-full overflow-hidden bg-surface-tint py-16 sm:py-20 lg:py-24">
-  <!-- Semicírculo turquesa → azul, recortado por el borde izquierdo -->
-  <div class="pointer-events-none absolute left-0 top-16 h-[183px] w-[107px] rounded-r-full bg-gradient-to-b from-accent-turquoise to-accent-blue" aria-hidden="true"></div>
-  <!-- Círculo inferior derecho accent-blue 30 % (bleed) -->
-  <div class="pointer-events-none absolute -bottom-24 -right-20 size-[280px] rounded-full bg-accent-blue/30" aria-hidden="true"></div>
+  <!-- Moléculas decorativas en las esquinas fijas y en tono suave (primary-100) para no distraer del formulario -->
+  <Molecule variant="chain" still class="absolute -left-8 top-6 size-28 text-primary-100 sm:-left-10 sm:top-12 sm:size-[183px]" />
+  <Molecule variant="ring" still class="absolute -bottom-10 -right-10 size-28 text-primary-100 sm:-bottom-16 sm:-right-16 sm:size-[183px]" />
 
   <PageContainer width="content" class="relative z-10">
     <div class="mx-auto max-w-[52.5rem] rounded-[2rem] bg-neutral-0 p-6 shadow-sm sm:rounded-media sm:p-12 lg:p-14">

@@ -1,0 +1,103 @@
+---
+/**
+ * Molécula decorativa 2D (átomos + enlaces), un solo color sólido (`currentColor`).
+ * Tamaño, posición y color se controlan con clases desde la sección que la usa.
+ * Decorativa: aria-hidden, sin eventos de puntero. Flota en vertical con GSAP (script abajo).
+ */
+interface Props {
+  /** ring: anillo hexagonal con sustituyentes · chain: cadena en zigzag ramificada */
+  variant?: 'ring' | 'chain';
+  /** true: sin flotación (figura fija) */
+  still?: boolean;
+  class?: string;
+}
+
+const { variant = 'ring', still = false, class: className } = Astro.props;
+
+type Atom = [number, number, number];
+type Bond = [number, number];
+
+// Coordenadas en un viewBox de 120×120
+const shapes: Record<'ring' | 'chain', { atoms: Atom[]; bonds: Bond[] }> = {
+  ring: {
+    atoms: [
+      // Anillo
+      [60, 36, 7], [81, 48, 7], [81, 72, 7], [60, 84, 7], [39, 72, 7], [39, 48, 7],
+      // Sustituyentes
+      [60, 12, 5], [102, 36, 5], [60, 108, 5], [18, 36, 5],
+      [102, 84, 4], [18, 84, 4],
+    ],
+    bonds: [
+      [0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0],
+      [0, 6], [1, 7], [3, 8], [5, 9], [2, 10], [4, 11],
+    ],
+  },
+  chain: {
+    atoms: [
+      [14, 70, 6], [36, 56, 7], [58, 70, 6], [80, 56, 7], [104, 70, 6],
+      [36, 32, 5], [80, 32, 5], [58, 94, 5], [24, 14, 4], [96, 14, 4],
+    ],
+    bonds: [
+      [0, 1], [1, 2], [2, 3], [3, 4],
+      [1, 5], [3, 6], [2, 7], [5, 8], [6, 9],
+    ],
+  },
+};
+
+const { atoms, bonds } = shapes[variant];
+---
+
+<svg
+  data-molecule={still ? undefined : ''}
+  viewBox="0 0 120 120"
+  class:list={['pointer-events-none select-none', className]}
+  aria-hidden="true"
+  focusable="false"
+>
+  <g stroke="currentColor" stroke-width="3" stroke-linecap="round">
+    {bonds.map(([a, b]) => <line x1={atoms[a][0]} y1={atoms[a][1]} x2={atoms[b][0]} y2={atoms[b][1]} />)}
+  </g>
+  <g fill="currentColor">
+    {atoms.map(([cx, cy, r]) => <circle cx={cx} cy={cy} r={r} />)}
+  </g>
+</svg>
+
+<script>
+  import { gsap } from 'gsap';
+
+  // Flotación vertical suave (4–6 s, yoyo infinito). Se pausa fuera de pantalla y no corre con reduced-motion.
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const tweens = new Map<Element, gsap.core.Tween>();
+
+  const io = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      const tween = tweens.get(entry.target);
+      if (tween) entry.isIntersecting ? tween.resume() : tween.pause();
+    }
+  });
+
+  const start = () => {
+    document.querySelectorAll('[data-molecule]').forEach((el, i) => {
+      const tween = gsap.to(el, {
+        y: -12,
+        rotation: i % 2 ? -4 : 4,
+        duration: 4 + ((i * 0.9) % 2),
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        paused: true,
+      });
+      tweens.set(el, tween);
+      io.observe(el);
+    });
+  };
+
+  const stop = () => {
+    io.disconnect();
+    tweens.forEach((tween) => tween.revert());
+    tweens.clear();
+  };
+
+  if (!motion.matches) start();
+  motion.addEventListener('change', (e) => (e.matches ? stop() : start()));
+</script>
