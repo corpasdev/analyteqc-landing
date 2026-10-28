@@ -148,8 +148,7 @@ export const founders: Founder[] = [
     tone: 'primary',
     name: 'Carlos Corpas',
     role: 'Servicio al cliente',
-    // TODO: validar leyenda
-    legend: 'Acompaña a cada laboratorio.',
+    legend: 'Brinda soporte al cliente.',
     photo: fotoCarlos,
   },
 ];
