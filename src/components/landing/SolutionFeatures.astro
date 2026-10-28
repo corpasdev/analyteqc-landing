@@ -2,11 +2,18 @@
 import PageContainer from '../layout/PageContainer.astro';
 import { SectionHeader } from './pieces/SectionHeader';
 import { FeatureCard } from './pieces/FeatureCard';
+import Molecule from './pieces/Molecule.astro';
 import { solutionFeatures } from '@/data/landing';
 ---
 
-<section id="solucion" class="relative w-full bg-surface-tint py-16 sm:py-20 lg:py-24">
-  <PageContainer width="content">
+<section id="solucion" class="relative w-full overflow-hidden bg-surface-tint py-16 sm:py-20 lg:py-24">
+  <!-- Moléculas decorativas fijas y suaves (mismo estilo que el Hero), ambas en el lado izquierdo:
+       arriba (sólo desde lg, para no rozar el título) y abajo (detrás de las tarjetas) -->
+  <Molecule variant="chain" still class="absolute -left-8 top-8 hidden size-[183px] text-primary-100 lg:block" />
+  <Molecule variant="ring" still class="absolute -bottom-10 -left-10 size-28 text-primary-100 sm:-bottom-16 sm:-left-8 sm:size-[183px]" />
+  <!-- Lado derecho: una en la parte alta (15 % de la altura), asomando por el borde (desde lg; en tablet queda detrás del título) -->
+  <Molecule variant="ring" still class="absolute -right-16 top-[15%] hidden size-[183px] -translate-y-1/2 text-primary-100 lg:block" />
+  <PageContainer width="content" class="relative z-10">
     <SectionHeader
       eyebrow="Precisión sin complicaciones"
       title="Un criterio analítico único, automático e"

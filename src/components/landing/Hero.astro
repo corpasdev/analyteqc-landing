@@ -1,6 +1,7 @@
 ---
 import PageContainer from '../layout/PageContainer.astro';
 import { RunVerdictAnimated } from './pieces/RunVerdictAnimated';
+import Molecule from './pieces/Molecule.astro';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { demoCta } from '@/config/navigation';
@@ -13,6 +14,11 @@ import { heroRuns } from '@/data/landing';
   (La foto de la bacterióloga queda pendiente de ubicar en otra sección.)
 -->
 <section class="relative w-full overflow-hidden bg-[linear-gradient(100deg,var(--color-surface-tint)_0%,var(--color-neutral-0)_100%)] pb-14 pt-10 sm:pb-20 sm:pt-14 lg:pb-16 lg:pt-12">
+  <!-- Moléculas decorativas fijas y suaves (mismo estilo y tamaño que en el formulario), ambas en el lado izquierdo:
+       arriba a la izquierda (sobre el H1, sólo desde lg) y abajo a la derecha (espejo de la superior) -->
+  <Molecule variant="chain" still class="absolute -left-16 -top-16 hidden size-[183px] text-primary-100 lg:block" />
+  <Molecule variant="ring" still class="absolute -bottom-10 -right-10 size-28 text-primary-100 sm:-bottom-16 sm:-right-16 sm:size-[183px]" />
+
   <PageContainer width="content" class="relative z-10">
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
       <!-- Mensaje -->
@@ -37,6 +43,7 @@ import { heroRuns } from '@/data/landing';
       <div class="hero-visual relative mx-auto w-full max-w-[30rem] lg:col-span-5 lg:mr-0 lg:max-w-[31rem]">
         <!-- Fondo suave detrás de la tarjeta -->
         <div class="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-primary-50 via-surface-tint to-accent-turquoise/15 sm:-inset-6 sm:rounded-media" aria-hidden="true"></div>
+
 
         <RunVerdictAnimated cases={heroRuns} client:load />
       </div>
