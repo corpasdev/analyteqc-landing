@@ -1,0 +1,66 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+---
+
+<header class="relative z-50 w-full bg-neutral-0">
+  <PageContainer width="content" class="flex h-[124px] items-center justify-between">
+    <!-- Logo (Isotipo matraz + lupa de 62px, Wordmark Analyte en primary-500 y QC en accent-turquoise) -->
+    <a
+      href="/"
+      class="group inline-flex items-center gap-4 transition-opacity duration-200 hover:opacity-85 focus-ring rounded-lg p-1"
+      aria-label="AnalyteQC - Inicio"
+    >
+      <img
+        src="/brand/analyteqc-logo.svg"
+        alt="AnalyteQC"
+        class="h-[52px] sm:h-[62px] w-auto"
+        width="351"
+        height="65"
+      />
+    </a>
+
+    <!-- Navegación de Escritorio -->
+    <nav class="hidden items-center gap-[56px] lg:flex" aria-label="Navegación principal">
+      <!-- Ítem Inicio (Activo: primary-500 con subrayado de 51 x 3 px con radio completo) -->
+      <div class="relative flex flex-col items-center">
+        <a
+          href="/"
+          class="text-[21px] font-medium leading-none text-primary-500 focus-ring rounded px-2 py-1"
+          aria-current="page"
+        >
+          Inicio
+        </a>
+        <span
+          class="absolute -bottom-[22px] h-[3px] w-[51px] rounded-full bg-primary-500"
+          aria-hidden="true"
+        ></span>
+      </div>
+
+      <!-- Ítem Servicios (brand-900) -->
+      <a
+        href="#servicios"
+        class="text-[21px] font-medium leading-none text-brand-900 transition-colors duration-200 hover:text-primary-500 focus-ring rounded px-2 py-1"
+      >
+        Servicios
+      </a>
+
+      <!-- Ítem Equipo (brand-900) -->
+      <a
+        href="#equipo"
+        class="text-[21px] font-medium leading-none text-brand-900 transition-colors duration-200 hover:text-primary-500 focus-ring rounded px-2 py-1"
+      >
+        Equipo
+      </a>
+    </nav>
+
+    <!-- CTA Contacto (166 x 60 px, píldora, relleno primary-500, texto 21 px/500 neutral-0, padding 0 38 px) -->
+    <div class="flex items-center gap-3">
+      <a
+        href="#contacto"
+        class="inline-flex h-[60px] items-center justify-center rounded-full bg-primary-500 px-[38px] text-[21px] font-medium text-neutral-0 transition-all duration-200 hover:bg-primary-600 active:scale-[0.98] focus-ring"
+      >
+        Contacto
+      </a>
+    </div>
+  </PageContainer>
+</header>

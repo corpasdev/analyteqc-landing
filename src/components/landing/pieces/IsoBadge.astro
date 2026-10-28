@@ -1,0 +1,28 @@
+---
+/**
+ * Sello ilustrativo ISO 15189 (diseño propio, no es el logo oficial de ISO:
+ * ISO no autoriza su logo para declarar conformidad). Pensado para fondo oscuro.
+ * Placa cuadrada con la norma + leyenda corta a la derecha.
+ */
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={['flex w-full max-w-[22rem] items-center gap-4 rounded-lg border border-neutral-0/15 p-4', className]}>
+  <!-- Sello circular: ISO + número de la norma -->
+  <svg viewBox="0 0 72 72" class="size-14 shrink-0 sm:size-16" aria-hidden="true">
+    <!-- Mismo borde que el contenedor: 1 px blanco al 15 %, sin fondo -->
+    <circle cx="36" cy="36" r="35.5" fill="none" stroke="var(--color-neutral-0)" stroke-opacity="0.15" stroke-width="1" vector-effect="non-scaling-stroke" />
+    <text x="36" y="37" text-anchor="middle" fill="var(--color-neutral-0)" font-size="20" font-weight="700" letter-spacing="1.5">ISO</text>
+    <text x="36" y="52" text-anchor="middle" fill="var(--color-neutral-0)" font-size="11.5" font-weight="600" letter-spacing="0.8">15189</text>
+  </svg>
+
+  <!-- Leyenda -->
+  <p class="min-w-0">
+    <!-- text-balance reparte las líneas -->
+    <span class="block text-[15px] font-normal leading-snug text-balance text-neutral-0">Calidad y competencia en laboratorios clínicos</span>
+  </p>
+</div>

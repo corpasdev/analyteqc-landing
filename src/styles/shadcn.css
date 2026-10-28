@@ -1,0 +1,123 @@
+/*
+ * AnalyteQC — Banco de componentes shadcn/ui
+ *
+ * Archivo dedicado a la configuración que sugiere la documentación de shadcn/ui
+ * para Tailwind v4 (https://ui.shadcn.com/docs/theming):
+ *   1. Animaciones de Radix (tw-animate-css).
+ *   2. Variante `dark` basada en clase (.dark).
+ *   3. Tokens semánticos (--background, --primary, ...) mapeados a la paleta de marca.
+ *   4. Exposición de esos tokens como utilidades vía `@theme inline`.
+ *   5. Estilos base (bordes y anillo de foco).
+ *
+ * `components.json` apunta a este archivo, así el CLI (`npx shadcn@latest add`)
+ * agrega aquí las variables que necesite cada componente nuevo.
+ *
+ * Nota: la escala de radios (--radius-sm…xl) y sombras se conserva desde
+ * global.css (sistema de marca); no se redefine aquí.
+ */
+
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Tema claro (por defecto) ─── */
+:root {
+  --radius: 0.875rem; /* 14px — radius-md de marca */
+
+  --background: #ffffff;              /* neutral-0 */
+  --foreground: #141c2b;              /* neutral-900 */
+
+  --card: #ffffff;
+  --card-foreground: #141c2b;
+
+  --popover: #ffffff;
+  --popover-foreground: #141c2b;
+
+  --primary: #0056ff;                 /* primary-500 */
+  --primary-foreground: #ffffff;
+
+  --secondary: #e8f0ff;               /* primary-50 */
+  --secondary-foreground: #1f3892;    /* brand-900 */
+
+  --muted: #f2f5fa;                   /* neutral-50 */
+  --muted-foreground: #667180;        /* neutral-500 */
+
+  --accent: #eef4fd;                  /* surface-tint */
+  --accent-foreground: #1f3892;
+
+  --destructive: #c8231a;             /* error-600 */
+
+  --border: #dde3ec;                  /* neutral-200 */
+  --input: #c3cbd6;                   /* neutral-300 */
+  --ring: #0056ff;
+
+  /* Series de cartas Levey-Jennings / estados Westgard */
+  --chart-1: #0056ff;
+  --chart-2: #00d0e3;
+  --chart-3: #16a35f;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+}
+
+/* ─── Tema oscuro (secciones con class="dark", p. ej. CTA) ─── */
+.dark {
+  --background: #0b111e;              /* neutral-950 */
+  --foreground: #ffffff;
+
+  --card: #141c2b;                    /* neutral-900 */
+  --card-foreground: #ffffff;
+
+  --popover: #141c2b;
+  --popover-foreground: #ffffff;
+
+  --primary: #0056ff;
+  --primary-foreground: #ffffff;
+
+  --secondary: #3d4756;               /* neutral-700 */
+  --secondary-foreground: #ffffff;
+
+  --muted: #1c2535;
+  --muted-foreground: #98a2b0;        /* neutral-400 */
+
+  --accent: #1c2535;
+  --accent-foreground: #00d0e3;       /* accent-turquoise */
+
+  --destructive: #ef4444;
+
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.16);
+  --ring: #00d0e3;
+}
+
+/* ─── Tokens semánticos → utilidades de Tailwind (bg-primary, text-muted-foreground, ...) ─── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+}

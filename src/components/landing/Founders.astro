@@ -1,0 +1,34 @@
+---
+import { getImage } from 'astro:assets';
+import PageContainer from '../layout/PageContainer.astro';
+import { SectionHeader } from './pieces/SectionHeader';
+import { FounderCard } from './pieces/FounderCard';
+import { founders } from '@/data/landing';
+
+// Fotos de perfil optimizadas: 4:5, 640 × 800 (2× del ancho de la tarjeta), WebP.
+const people = await Promise.all(
+  founders.map(async ({ photo, photoPosition = 'top', photoIsPlaceholder, ...founder }) => ({
+    ...founder,
+    // Las fotos de relleno nunca llegan a producción.
+    photoSrc: photo && !(photoIsPlaceholder && import.meta.env.PROD)
+      ? (await getImage({ src: photo, width: 640, height: 800, fit: 'cover', position: photoPosition, format: 'webp' })).src
+      : undefined,
+  })),
+);
+---
+
+<!-- Nosotros: sólo quiénes son los promotores y qué aportó cada uno -->
+<section id="fundadores" class="relative w-full bg-surface-tint py-16 sm:py-20 lg:py-24">
+  <PageContainer width="content">
+    <SectionHeader eyebrow="Nosotros" title="Quiénes están detrás de" highlight="AnalyteQC" />
+
+    <!-- 1 col móvil · 2 col sm · 3 col lg (flex-wrap: si queda una tarjeta sola en la fila, va centrada) -->
+    <div class="mx-auto mt-12 flex max-w-sm flex-wrap justify-center gap-8 sm:max-w-[44rem] lg:max-w-[66rem]">
+      {people.map((person) => (
+        <div class="w-full sm:w-[calc(50%-1rem)] lg:w-[calc((100%-4rem)/3)]">
+          <FounderCard {...person} />
+        </div>
+      ))}
+    </div>
+  </PageContainer>
+</section>

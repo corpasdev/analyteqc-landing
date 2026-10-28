@@ -1,0 +1,23 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+import { SectionHeader } from './pieces/SectionHeader';
+import { PainPointCard } from './pieces/PainPointCard';
+import { painPoints } from '@/data/landing';
+---
+
+<section id="el-problema" class="relative w-full bg-neutral-0 pb-16 pt-20 sm:pb-20 lg:pb-24 lg:pt-20">
+  <PageContainer width="content">
+    <SectionHeader
+      eyebrowTone="brand"
+      eyebrow="El reto de la rutina analítica"
+      title="¿Tu control de calidad te da tranquilidad o"
+      highlight="te quita tiempo valioso?"
+      description="La rutina diaria en el laboratorio exige agilidad. Sin embargo, los métodos manuales y las hojas de cálculo tradicionales introducen riesgos silenciosos que comprometen la seguridad diagnóstica."
+    />
+
+    <!-- 1 col móvil · 3 col desde md, separadas por divisores verticales neutral-200 -->
+    <div class="mt-12 grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-0 md:divide-x md:divide-neutral-200 lg:mt-14">
+      {painPoints.map((item) => <PainPointCard {...item} />)}
+    </div>
+  </PageContainer>
+</section>

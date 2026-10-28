@@ -1,0 +1,55 @@
+---
+import PageContainer from '../layout/PageContainer.astro';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { demoCta, headerLinks } from '@/config/navigation';
+---
+
+<!--
+  Header mínimo: logo + 2 enlaces + CTA (siempre visible).
+  Mismo fondo que el Hero + borde inferior sutil.
+  Al hacer scroll (sticky) el fondo se vuelve translúcido con un blur suave.
+-->
+<header
+  id="site-header"
+  data-scrolled="false"
+  class="group/header sticky top-0 z-50 w-full border-b border-brand-900/10 transition-[backdrop-filter] duration-300 data-[scrolled=true]:backdrop-blur-md"
+>
+  <div
+    class="absolute inset-0 -z-10 bg-[linear-gradient(100deg,var(--color-surface-tint)_0%,var(--color-neutral-0)_100%)] transition-opacity duration-300 group-data-[scrolled=true]/header:opacity-80"
+    aria-hidden="true"
+  ></div>
+  <PageContainer width="content" class="flex h-16 items-center justify-between gap-4 sm:h-[72px]">
+    <a href="/" class="inline-flex shrink-0 rounded-md p-1 transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500" aria-label="AnalyteQC - Inicio">
+      <img src="/brand/analyteqc-logo.svg" alt="AnalyteQC" class="h-[26px] w-auto sm:h-[29px] xl:h-[33px]" width="351" height="65" />
+    </a>
+
+    <div class="flex items-center gap-6 sm:gap-8">
+      <nav class="hidden items-center gap-6 md:flex" aria-label="Navegación principal">
+        {headerLinks.map((link) => (
+          <a
+            href={link.href}
+            class="whitespace-nowrap rounded-[6px] px-1 py-1 text-[15px] font-medium text-brand-900 transition-colors hover:text-primary-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 active:text-primary-700"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <a id="header-cta" href={demoCta.href} class={cn(buttonVariants({ size: 'cta' }))}>
+        {demoCta.label}
+      </a>
+    </div>
+  </PageContainer>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    if (header) header.dataset.scrolled = String(window.scrollY > 4);
+  };
+  window.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+  update();
+</script>
