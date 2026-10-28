@@ -1,15 +1,7 @@
-/**
- * Fotos de RELLENO (Unsplash / Pexels) mientras llegan las fotos reales de los promotores.
- * Son personas ajenas al proyecto: marcadas con `photoIsPlaceholder` para que sólo se vean
- * en desarrollo; en el build de producción esas tarjetas muestran las iniciales.
- * TODO: reemplazar por las fotos reales de Amauris Gómez y Carlos Corpas.
- * - https://images.unsplash.com/photo-1758598497190-f609ecba227b
- * - https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg
- */
-import placeholderBacteriologo from '@/assets/team/placeholder-bacteriologo.jpg';
-import placeholderServicio from '@/assets/team/placeholder-servicio.jpg';
-/** Foto real. */
-import fotoBrandon from '@/assets/team/brandon-corpas.jpeg';
+/** Fotos reales del equipo. */
+import fotoAmauris from '@/assets/team/placeholder-bacteriologo.png';
+import fotoBrandon from '@/assets/team/placeholder-ingeniero.png';
+import fotoCarlos from '@/assets/team/placeholder-servicio.png';
 /**
  * AnalyteQC — Contenido de la landing.
  *
@@ -141,9 +133,7 @@ export const founders: Founder[] = [
     name: 'Amauris Gómez',
     role: 'Bacteriólogo',
     legend: 'Identificó el problema en el laboratorio.',
-    photo: placeholderBacteriologo,
-    photoPosition: 'center',
-    photoIsPlaceholder: true,
+    photo: fotoAmauris,
   },
   {
     initials: 'BC',
@@ -160,8 +150,7 @@ export const founders: Founder[] = [
     role: 'Servicio al cliente',
     // TODO: validar leyenda
     legend: 'Acompaña a cada laboratorio.',
-    photo: placeholderServicio,
-    photoIsPlaceholder: true,
+    photo: fotoCarlos,
   },
 ];
 
